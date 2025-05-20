@@ -8,6 +8,9 @@ import PolitiqueConfidentialite from '../pages/PolitiqueConfidentialite';
 import Home from '../pages/Home';
 import DocumentGeneration from '../pages/DocumentGeneration';
 import DocumentDetails from '../pages/DocumentDetails';
+import PrivateLayout from '../layouts/PrivateLayout';
+import AuthLayout from '../layouts/AuthLayout';
+import PublicLayout from '../layouts/PublicLayout';
 
 function AppRouter() {
   return (
@@ -19,9 +22,12 @@ function AppRouter() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/mentions-legales" element={<MentionsLegales />} />
         <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/generate/:documentType" element={<DocumentGeneration />} />
-        <Route path="/document/:id" element={<DocumentDetails />} />
+        {/* Routes privées sous PrivateLayout */}
+        <Route element={<PrivateLayout />}>
+          <Route path="/home" element={<Home />} />
+          <Route path="/generate/:documentType" element={<DocumentGeneration />} />
+          <Route path="/document/:id" element={<DocumentDetails />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
