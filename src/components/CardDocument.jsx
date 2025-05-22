@@ -4,8 +4,12 @@ import Button from "./Button";
 function CardDocument({ icon, title, description, onStart }) {
   return (
     <div
-      className="flex flex-col justify-between bg-[#EEF0FF] rounded-xl shadow-md transition-transform hover:scale-[1.025] hover:shadow-lg"
+      className="flex flex-col justify-between bg-[#EEF0FF] rounded-xl shadow-md transition-transform hover:scale-[1.025] hover:shadow-lg cursor-pointer"
       style={{ width: 340, height: 190, padding: 20 }}
+      onClick={onStart}
+      tabIndex={0}
+      role="button"
+      onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && onStart()}
     >
       {/* En-tête */}
       <div className="flex items-center gap-3 mb-2">
@@ -22,7 +26,10 @@ function CardDocument({ icon, title, description, onStart }) {
       </div>
       {/* Pied */}
       <div className="flex justify-center">
-        <Button onClick={onStart}>Commencer</Button>
+        {/* Le bouton reste visible mais tout le bloc est cliquable */}
+        <span className="pointer-events-none">
+          <Button onClick={onStart}>Commencer</Button>
+        </span>
       </div>
     </div>
   );

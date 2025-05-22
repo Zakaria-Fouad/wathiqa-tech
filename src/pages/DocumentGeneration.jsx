@@ -10,6 +10,9 @@ function DocumentGeneration() {
 
   return (
     <div className="max-w-4xl mx-auto py-8 min-h-screen flex flex-col items-center justify-center">
+        <a href="/home" className="self-start mb-4 text-indigo-600 hover:underline text-base font-medium">
+            &larr; Retour à l'accueil
+        </a>
       <h1 className="text-3xl font-bold text-gray-900 mb-8">Générer un {config.label}</h1>
       <div className="bg-white rounded-2xl shadow p-8 w-full">
         <DynamicDocumentForm config={config} />

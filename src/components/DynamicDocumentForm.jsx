@@ -20,7 +20,7 @@ function DynamicDocumentForm({ config }) {
         onChange={e => setSelectedType(e.target.value)}
       />
       <form className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-        {fields.map(field => (
+        {fields && fields.map(field => (
           <div key={field.name}>
             <label className="block mb-1 font-medium">{field.label}</label>
             <input

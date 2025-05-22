@@ -1,5 +1,9 @@
+import ModalConfirmationSuppression from "../components/ModalConfirmationSuppression";
+
 // Détails d'un document
 function DocumentDetails() {
-  return <div>Document Details Page</div>;
+  return (
+    <ModalConfirmationSuppression/>
+  );
 }
 export default DocumentDetails;
