@@ -54,7 +54,7 @@ function Home() {
       >
         <div className="w-full flex flex-col items-center">
           <h1 className="text-3xl font-bold text-gray-900 mb-18 mt-0 text-center">Quel document souhaitez-vous générer ?</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-1 gap-y-8 w-full max-w-4xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8 w-full max-w-4xl justify-center">
             {cards.map((card, idx) => (
               <CardDocument
                 key={idx}

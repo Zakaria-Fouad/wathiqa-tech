@@ -9,12 +9,12 @@ function DocumentGeneration() {
   const config = documentForms[documentType] || documentForms[Object.keys(documentForms)[0]];
 
   return (
-    <div className="max-w-4xl mx-auto py-8 min-h-screen flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center bg-white relative">
         <a href="/home" className="self-start mb-4 text-indigo-600 hover:underline text-base font-medium">
             &larr; Retour à l'accueil
         </a>
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Générer un {config.label}</h1>
-      <div className="bg-white rounded-2xl shadow p-8 w-full">
+      <div className="flex flex-col items-center justify-center mt-24 bg-white">
+        <h1 className="text-3xl font-bold text-gray-900 mb-8">Générer un {config.label}</h1>
         <DynamicDocumentForm config={config} />
       </div>
     </div>

@@ -11,6 +11,7 @@ import DocumentDetails from '../pages/DocumentDetails';
 import PrivateLayout from '../layouts/PrivateLayout';
 import AuthLayout from '../layouts/AuthLayout';
 import PublicLayout from '../layouts/PublicLayout';
+import AccountPage from '../pages/AccountPage';
 
 function AppRouter() {
   return (
@@ -27,7 +28,9 @@ function AppRouter() {
           <Route path="/home" element={<Home />} />
           <Route path="/generate/:documentType" element={<DocumentGeneration />} />
           <Route path="/document/:id" element={<DocumentDetails />} />
+          <Route path="/account" element={<AccountPage />} />
         </Route>
+        
       </Routes>
     </BrowserRouter>
   );
