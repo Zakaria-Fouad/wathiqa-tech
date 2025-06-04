@@ -53,14 +53,17 @@ my-app/
 │   │   │   └── HeaderC.jsx            # Header minimal pour auth (logo uniquement)
 │   │   ├── Footer.jsx
 │   │   ├── Sidebar.jsx
+        ├── AccountForm.jsx
 │   │   ├── CardDocument.jsx
+        ├── DynamicDocumentForm.jsx
 │   │   ├── FormulaireDocument.jsx
 │   │   ├── SelectSousType.jsx
 │   │   ├── HistoriqueDocuments.jsx
 │   │   ├── ApercuDocument.jsx
 │   │   ├── Loader.jsx
 │   │   ├── Button.jsx
-│   │   └── Modal.jsx
+        ├── ModalConfirmationSuppression.jsx
+│   │   └── ModalRechercheDocument.jsx
 │   │
 │   ├── layouts/                        # Layouts globaux par type de page
 │   │   ├── PublicLayout.jsx           # HeaderA + Footer
@@ -71,6 +74,7 @@ my-app/
 │   │   ├── Landing.jsx
 │   │   ├── Login.jsx
 │   │   ├── Signup.jsx
+        ├── AccountForm.jsx
 │   │   ├── ForgotPassword.jsx
 │   │   ├── MentionsLegales.jsx
 │   │   ├── ConditionsUtilisation.jsx
