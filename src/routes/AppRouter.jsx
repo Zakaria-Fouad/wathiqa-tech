@@ -12,6 +12,10 @@ import PrivateLayout from '../layouts/PrivateLayout';
 import AuthLayout from '../layouts/AuthLayout';
 import PublicLayout from '../layouts/PublicLayout';
 import AccountPage from '../pages/AccountPage';
+import AdminLayout from '../layouts/AdminLayout';
+import AdminDashboard from '../pages/AdminDashboard';
+import UsersManagement from '../pages/UsersManagement';
+import DocumentsManagement from '../pages/DocumentsManagement';
 
 function AppRouter() {
   return (
@@ -30,7 +34,12 @@ function AppRouter() {
           <Route path="/document/:id" element={<DocumentDetails />} />
           <Route path="/account" element={<AccountPage />} />
         </Route>
-        
+        {/* Routes admin séparées sous AdminLayout */}
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminDashboard />} />
+          <Route path="utilisateurs" element={<UsersManagement />} />
+          <Route path="documents" element={<DocumentsManagement />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

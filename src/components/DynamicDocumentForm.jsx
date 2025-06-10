@@ -33,19 +33,19 @@ function DynamicDocumentForm({ config }) {
     setLoading(true);
     try {
       const payload = {
-        type: selectedType,
         title: formData.title,
-        categorie: config.label,
-        content: JSON.stringify({
-          ...Object.fromEntries(
+        content: JSON.stringify(
+          Object.fromEntries(
             Object.entries(formData).filter(([key]) => key !== "title")
           )
-        })
+        )
       };
+      console.log("Payload envoyé à Laravel :", payload); // Ajoute ce log ici
       const doc = await documentService.create(payload);
+      console.log(doc);
       setSuccess(true);
-      // Rediriger vers l'aperçu du document généré si besoin
-      navigate(`/documents/${doc.id}`);
+      // Rediriger vers la page de détails pour téléchargement
+      navigate(`/document/${doc.document.id}`);
     } catch (err) {
       setError(err.response?.data?.message || "Erreur lors de la création du document");
     } finally {
