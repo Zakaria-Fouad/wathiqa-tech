@@ -4,7 +4,7 @@ import Button from "./Button";
 import { documentService } from "../services/documentService";
 import { useNavigate } from "react-router-dom";
 
-function DynamicDocumentForm({ config }) {
+function DynamicDocumentForm({ config, onDocumentCreated }) {
   const [selectedType, setSelectedType] = useState(config.defaultType);
   // Initialiser le titre avec le label du type sélectionné par défaut
   const initialTitle = config.types[config.defaultType]?.label || config.label;
@@ -31,23 +31,32 @@ function DynamicDocumentForm({ config }) {
     e.preventDefault();
     setError("");
     setLoading(true);
+    setSuccess(false);
     try {
+      // Construction du body à plat pour le template
+      const contentFields = Object.fromEntries(
+        Object.entries(formData).filter(([key]) => key !== "title")
+      );
       const payload = {
+        type_template: selectedType, // le type du template
         title: formData.title,
-        content: JSON.stringify(
-          Object.fromEntries(
-            Object.entries(formData).filter(([key]) => key !== "title")
-          )
-        )
+        ...contentFields // tous les champs dynamiques à plat
       };
-      console.log("Payload envoyé à Laravel :", payload); // Ajoute ce log ici
-      const doc = await documentService.create(payload);
-      console.log(doc);
+      // Création du document via l'endpoint from-template
+      const res = await documentService.createFromTemplate(payload);
+      console.log('Réponse création document (template):', res);
       setSuccess(true);
-      // Rediriger vers la page de détails pour téléchargement
-      navigate(`/document/${doc.document.id}`);
+      // Redirection vers la page d'aperçu du document généré
+      if (res && res.document && res.document.id) {
+        navigate(`/document/${res.document.id}`);
+      } else if (onDocumentCreated) {
+        onDocumentCreated();
+      } else {
+        window.location.reload();
+      }
     } catch (err) {
-      setError(err.response?.data?.message || "Erreur lors de la création du document");
+      setError(err.response?.data?.message || "Erreur lors de la génération du document");
+      alert(err.response?.data?.message || "Erreur lors de la génération du document");
     } finally {
       setLoading(false);
     }
@@ -91,7 +100,7 @@ function DynamicDocumentForm({ config }) {
           <Button type="submit" disabled={loading}>{loading ? "Génération..." : "Générer"}</Button>
         </div>
       </form>
-      {success && <div className="text-green-600 mt-4">Document créé avec succès !</div>}
+      {success && <div className="text-green-600 mt-4">Document généré avec succès !</div>}
     </div>
   );
 }

@@ -16,6 +16,7 @@ import AdminLayout from '../layouts/AdminLayout';
 import AdminDashboard from '../pages/AdminDashboard';
 import UsersManagement from '../pages/UsersManagement';
 import DocumentsManagement from '../pages/DocumentsManagement';
+import PrivateRoute from '../components/PrivateRoute';
 
 function AppRouter() {
   return (
@@ -28,14 +29,22 @@ function AppRouter() {
         <Route path="/mentions-legales" element={<MentionsLegales />} />
         <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />
         {/* Routes privées sous PrivateLayout */}
-        <Route element={<PrivateLayout />}>
+        <Route element={
+          <PrivateRoute>
+            <PrivateLayout />
+          </PrivateRoute>
+        }>
           <Route path="/home" element={<Home />} />
           <Route path="/generate/:documentType" element={<DocumentGeneration />} />
           <Route path="/document/:id" element={<DocumentDetails />} />
           <Route path="/account" element={<AccountPage />} />
         </Route>
         {/* Routes admin séparées sous AdminLayout */}
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route path="/admin" element={
+          <PrivateRoute>
+            <AdminLayout />
+          </PrivateRoute>
+        }>
           <Route index element={<AdminDashboard />} />
           <Route path="utilisateurs" element={<UsersManagement />} />
           <Route path="documents" element={<DocumentsManagement />} />

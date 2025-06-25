@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import HeaderC from "../components/headers/HeaderC";
 import Button from "../components/Button";
 import { authService } from "../services/authService";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -10,13 +11,15 @@ const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { setUser } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
     try {
-      await authService.login({ email, password });
+      const data = await authService.login({ email, password });
+      setUser(data.user);
       navigate("/home");
     } catch (err) {
       setError(err.response?.data?.message || "Erreur de connexion");

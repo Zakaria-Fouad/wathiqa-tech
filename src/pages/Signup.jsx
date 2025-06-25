@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import HeaderC from "../components/headers/HeaderC";
 import Button from "../components/Button";
 import { authService } from "../services/authService";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -12,6 +13,7 @@ const Signup = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { setUser } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,7 +24,8 @@ const Signup = () => {
     }
     setLoading(true);
     try {
-      await authService.register({ name, email, password, password_confirmation: passwordConfirm });
+      const data = await authService.register({ name, email, password, password_confirmation: passwordConfirm });
+      setUser(data.user);
       navigate("/home");
     } catch (err) {
         setError(

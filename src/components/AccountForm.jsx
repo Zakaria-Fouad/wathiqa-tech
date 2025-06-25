@@ -3,7 +3,7 @@ import Button from './Button';
 
 const AccountForm = () => {
   return (
-    <div className="bg-blue-50 rounded-xl shadow p-8 max-w-2xl mx-auto mt-6">
+    <div className="bg-[#EEF0FF] rounded-xl shadow p-8 max-w-2xl mx-auto mt-6">
       {/* Titre principal */}
       <h1 className="text-3xl font-bold text-gray-900 mb-8 text-left">Mon Profil</h1>
       {/* Section informations personnelles */}
@@ -13,18 +13,20 @@ const AccountForm = () => {
           {/* Nom complet */}
           <div className="flex flex-col">
             <label className="text-sm font-semibold text-gray-900 mb-1">Nom complet</label>
-            <span className="text-gray-600 text-base bg-white rounded px-4 py-2 border border-gray-200">Emma Martinez</span>
+            <span className="text-gray-600 text-base bg-white rounded px-4 py-2 border border-gray-200">Try2</span>
           </div>
           {/* Email */}
           <div className="flex flex-col">
             <label className="text-sm font-semibold text-gray-900 mb-1">Email</label>
-            <span className="text-gray-600 text-base bg-white rounded px-4 py-2 border border-gray-200">Emma.Martinez@gmail.com</span>
+            <span className="text-gray-600 text-base bg-white rounded px-4 py-2 border border-gray-200">try2@example.com</span>
           </div>
           {/* Mot de passe */}
           <div className="flex flex-col md:col-span-2">
             <div className="flex items-center justify-between">
               <label className="text-sm font-semibold text-gray-900 mb-1">Mot de passe</label>
-              <button type="button" className="text-blue-600 text-sm font-semibold hover:underline">Changer le mot de passe &gt;</button>
+              <button type="button" className="text-blue-600 text-sm font-semibold hover:underline">
+                Changer le mot de passe &gt;
+              </button>
             </div>
           </div>
           {/* Date de création */}

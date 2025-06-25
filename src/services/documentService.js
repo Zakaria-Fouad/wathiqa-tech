@@ -48,9 +48,23 @@ export const documentService = {
     return res.data;
   },
 
-  // Génération de texte IA
-  generateText: async (payload) => {
-    const res = await axios.post(`${API_URL}/generer-texte`, payload, { headers: getAuthHeader() });
+  // Aperçu/génération du PDF
+  getPdf: async (id) => {
+    const res = await axios.get(`${API_URL}/documents/${id}/pdf`, {
+      headers: getAuthHeader(),
+      responseType: 'blob',
+    });
+    return res.data;
+  },
+
+  // Crée un document à partir d'un template
+  createFromTemplate: async (data) => {
+    const res = await axios.post(`${API_URL}/documents/from-template`, data, {
+      headers: {
+        ...getAuthHeader(),
+        'Content-Type': 'application/json',
+      },
+    });
     return res.data;
   },
 };

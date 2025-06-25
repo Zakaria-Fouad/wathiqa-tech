@@ -2,21 +2,19 @@ import axios from "axios";
 
 const API_URL = "http://127.0.0.1:8000/api";
 
-function getAuthHeader() {
-  const token = localStorage.getItem("token");
-  return token ? { Authorization: `Bearer ${token}` } : {};
-}
-
-// Auth API service
 export const authService = {
   // Connexion
   login: async (credentials) => {
     const res = await axios.post(`${API_URL}/login`, credentials);
-    // On suppose que le token est dans res.data.token
-    if (res.data.token) {
-      localStorage.setItem("token", res.data.token);
-    }
-    return res.data;
+    const token = res.data.token;
+    localStorage.setItem("token", token);
+
+    // Récupérer l'utilisateur connecté
+    const userRes = await axios.get(`${API_URL}/user`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    localStorage.setItem("user", JSON.stringify(userRes.data));
+    return userRes.data;
   },
 
   // Inscription
@@ -31,7 +29,11 @@ export const authService = {
 
   // Déconnexion
   logout: async () => {
-    const res = await axios.post(`${API_URL}/logout`, {}, { headers: getAuthHeader() });
+    const res = await axios.post(
+      `${API_URL}/logout`,
+      {},
+      { headers: getAuthHeader() }
+    );
     localStorage.removeItem("token");
     return res.data;
   },
@@ -41,4 +43,21 @@ export const authService = {
     const res = await axios.get(`${API_URL}/user`, { headers: getAuthHeader() });
     return res.data;
   },
+
+  // Mettre à jour le profil utilisateur (nom)
+  updateProfile: async (data) => {
+    const res = await axios.put(`${API_URL}/user/update`, data, { headers: getAuthHeader() });
+    return res.data;
+  },
+
+  // Changer le mot de passe
+  changePassword: async (data) => {
+    const res = await axios.put(`${API_URL}/user/password`, data, { headers: getAuthHeader() });
+    return res.data;
+  },
 };
+
+function getAuthHeader() {
+  const token = localStorage.getItem('token');
+  return token ? { Authorization: `Bearer ${token}` } : {};
+}

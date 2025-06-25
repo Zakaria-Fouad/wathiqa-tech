@@ -77,8 +77,34 @@ function ApercuDocument() {
           </div>
           {/* Boutons d'action */}
           <div className="flex justify-center gap-4 mt-8 w-full">
-            <button className="border border-gray-300 bg-white text-gray-700 rounded-xl px-6 py-3 font-medium hover:bg-gray-50 transition">Supprimer</button>
-            <button className="border border-gray-300 bg-white text-gray-700 rounded-xl px-6 py-3 font-medium hover:bg-gray-50 transition">Modifier</button>
+            <button
+              className="border border-gray-300 bg-white text-gray-700 rounded-xl px-6 py-3 font-medium hover:bg-gray-50 transition"
+              type="button"
+              onClick={async () => {
+                if (window.confirm('Voulez-vous vraiment supprimer ce document ?')) {
+                  try {
+                    await documentService.remove(documentId);
+                    alert('Document supprimé avec succès.');
+                    window.location.href = '/home'; 
+                  } catch (e) {
+                    alert('Erreur lors de la suppression du document');
+                  }
+                }
+              }}
+            >
+              Supprimer
+            </button>
+            <button
+              className="border border-gray-300 bg-white text-gray-700 rounded-xl px-6 py-3 font-medium hover:bg-gray-50 transition"
+              type="button"
+              onClick={() => {
+                // Ouvre l'aperçu PDF dans un nouvel onglet (URL backend forcée)
+                const url = `http://127.0.0.1:8000/api/documents/${documentId}/preview`;
+                window.open(url, '_blank');
+              }}
+            >
+              Visualiser
+            </button>
             <Button onClick={() => handleDownload(documentId)}>Télécharger</Button>
           </div>
         </div>
