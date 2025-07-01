@@ -57,14 +57,14 @@ export const documentService = {
     return res.data;
   },
 
-  // Crée un document à partir d'un template
-  createFromTemplate: async (data) => {
-    const res = await axios.post(`${API_URL}/documents/from-template`, data, {
-      headers: {
-        ...getAuthHeader(),
-        'Content-Type': 'application/json',
-      },
-    });
-    return res.data;
-  },
+  // Crée un document à partir d'un template (endpoint /documents/generate)
+  // createFromTemplate: async (data) => {
+  //   const res = await axios.post(`${API_URL}/documents/generate`, data, {
+  //     headers: {
+  //       ...getAuthHeader(),
+  //       'Content-Type': 'application/json',
+  //     },
+  //   });
+  //   return res.data;
+  // },
 };

@@ -17,6 +17,7 @@ import AdminDashboard from '../pages/AdminDashboard';
 import UsersManagement from '../pages/UsersManagement';
 import DocumentsManagement from '../pages/DocumentsManagement';
 import PrivateRoute from '../components/PrivateRoute';
+import UsagePage from '../pages/UsagePage';
 
 function AppRouter() {
   return (
@@ -48,6 +49,7 @@ function AppRouter() {
           <Route index element={<AdminDashboard />} />
           <Route path="utilisateurs" element={<UsersManagement />} />
           <Route path="documents" element={<DocumentsManagement />} />
+          <Route path="usage" element={<UsagePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

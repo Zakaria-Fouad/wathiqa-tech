@@ -33,17 +33,18 @@ function DynamicDocumentForm({ config, onDocumentCreated }) {
     setLoading(true);
     setSuccess(false);
     try {
-      // Construction du body à plat pour le template
+      // Construction du body attendu par l'API Laravel
       const contentFields = Object.fromEntries(
         Object.entries(formData).filter(([key]) => key !== "title")
       );
       const payload = {
-        type_template: selectedType, // le type du template
-        title: formData.title,
-        ...contentFields // tous les champs dynamiques à plat
+        document: {
+          title: formData.title,
+          content: JSON.stringify(contentFields),
+        },
       };
-      // Création du document via l'endpoint from-template
-      const res = await documentService.createFromTemplate(payload);
+      // Création du document via l'endpoint principal (POST /documents)
+      const res = await documentService.create(payload);
       console.log('Réponse création document (template):', res);
       setSuccess(true);
       // Redirection vers la page d'aperçu du document généré
